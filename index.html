@@ -1,0 +1,78 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    font-family: IBM Plex Sans Arabic;
+    font-size: 20px;
+    box-sizing: border-box;
+  }
+
+  input {
+    border: none;
+    padding: 1em;
+    border-radius: 1em;
+    outline: none;
+  }
+
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  #wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+    background: lightgrey;
+    padding: 1em;
+    border-radius: 1.7em;
+    text-align: center;
+  }
+
+  #wrapper input {
+    margin-bottom: 2em;
+    margin-top: 1em;
+    width: 100%;
+  }
+
+  #wrapper #size {
+    margin-bottom: 0em;
+    margin-top: 1em;
+  }
+
+  #result {
+    margin-top: 1em;
+    background: rgba(131, 36, 255, 0.5);
+    padding: 0.5em 1em;
+    border-radius: 1em;
+  }
+</style>
+
+
+<div id="wrapper">
+  <label for="duration">المدة بالثواني</label>
+  <input id="duration" name="duration" type="text" placeholder="ex: 30s" oninput="update()">
+  <label for="size">الحجم النهائي بالميجابايت</label>
+  <input id="size" name="size" type="text" placeholder="StreamElements Max Size = 30" oninput="update()">
+  <div id="result"></div>
+</div>
+
+<script>
+  let duration = document.getElementById("duration");
+  let size = document.getElementById("size");
+  let result = document.getElementById("result");
+
+  function update() {
+    if(duration.value && size.value) {
+      result.innerHTML = (parseInt(size.value)*8191)/parseInt(duration.value)-128 + " kbits/s"
+    }
+  }
+</script>
