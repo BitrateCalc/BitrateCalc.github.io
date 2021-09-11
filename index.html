@@ -7,6 +7,7 @@
     font-family: IBM Plex Sans Arabic;
     font-size: 20px;
     box-sizing: border-box;
+    color: white;
   }
 
   input {
@@ -14,6 +15,7 @@
     padding: 1em;
     border-radius: 1em;
     outline: none;
+    background: rgba(70, 70, 70, 1);
   }
 
   body {
@@ -22,6 +24,7 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    background: rgb(28, 28, 28);
   }
 
   #wrapper {
@@ -31,7 +34,7 @@
     align-items: center;
     max-width: 800px;
     margin: auto;
-    background: lightgrey;
+    background: rgba(50, 50, 50, 0.7);
     padding: 1em;
     border-radius: 1.7em;
     text-align: center;
@@ -49,6 +52,7 @@
   }
 
   #result {
+    display: none;
     margin-top: 1em;
     background: rgba(131, 36, 255, 0.5);
     padding: 0.5em 1em;
@@ -61,7 +65,7 @@
   <label for="duration">المدة بالثواني</label>
   <input id="duration" name="duration" type="text" placeholder="ex: 30s" oninput="update()">
   <label for="size">الحجم النهائي بالميجابايت</label>
-  <input id="size" name="size" type="text" placeholder="StreamElements Max Size = 30" oninput="update()">
+  <input id="size" name="size" type="text" placeholder="StreamElements Max Size = 30mb" oninput="update()">
   <div id="result"></div>
 </div>
 
@@ -72,7 +76,10 @@
 
   function update() {
     if(duration.value && size.value) {
-      result.innerHTML = (parseInt(size.value)*8191)/parseInt(duration.value)-128 + " kbits/s"
+      result.innerHTML = Math.floor((parseInt(size.value)*8191)/parseInt(duration.value)-128) + " kb/s"
+      result.style.display = "block"
+    } else {
+      result.style.display = "none"
     }
   }
 </script>
